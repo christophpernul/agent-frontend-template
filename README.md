@@ -1,7 +1,34 @@
 # agent-frontend-template
 
-This is a template repository for building a frontend interface for an AI agent using Gradio. It provides a basic structure and example code to help you get started quickly.
+This is a template repository for building a frontend interface for an AI agent using Gradio or Chainlit.
+It provides a basic structure and example code to help you get started quickly.
 
+## Run Agents
+
+1. **Install dependencies:**
+   ```bash
+   uv sync
+   ```
+
+2. **Set up environment variables:**
+   Create a `.env` file in the project root:
+   ```
+   OPENAI_API_KEY=your_openai_api_key_here
+   ```
+
+### Gradio
+
+Run Gradio application with this command:
+```bash
+   python run_gradio.py
+```
+
+### Chainlit
+
+Run chainlit application with this command:
+```bash
+   chainlit run run_chainlit.py -w
+```
 
 ## Links
 

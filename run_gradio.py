@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-CLI script to run the Travel Agent.
+CLI script to run the AI Agent.
 """
 
 import sys

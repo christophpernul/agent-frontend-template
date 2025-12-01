@@ -72,10 +72,9 @@ def main_gradio():
         server_name="0.0.0.0",
         server_port=7860,
         share=False,  # Set to True if you want a public link
-        show_error=True
+        show_error=True,
     )
 
 
 if __name__ == "__main__":
     main_gradio()
-

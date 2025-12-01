@@ -19,7 +19,7 @@ class ApplicationInterface:
     def create_interface(self) -> gr.Blocks:
         """Create the Gradio interface."""
         with gr.Blocks(
-                title=APPLICATION_NAME,
+            title=APPLICATION_NAME,
         ) as interface:
             gr.Markdown(APPLICATION_DESCRIPTION)
 
@@ -37,7 +37,7 @@ class ApplicationInterface:
                     label="Submit Message",
                     placeholder="e.g., Tell me something about Munich.",
                     lines=2,
-                    scale=3
+                    scale=3,
                 )
 
             with gr.Row():
@@ -46,21 +46,14 @@ class ApplicationInterface:
 
             # Event handlers
             submit_btn.click(
-                self.agent_chat.run,
-                inputs=[msg, chatbot],
-                outputs=[msg, chatbot]
+                self.agent_chat.run, inputs=[msg, chatbot], outputs=[msg, chatbot]
             )
 
             msg.submit(
-                self.agent_chat.run,
-                inputs=[msg, chatbot],
-                outputs=[msg, chatbot]
+                self.agent_chat.run, inputs=[msg, chatbot], outputs=[msg, chatbot]
             )
 
-            clear_btn.click(
-                lambda: ([], ""),
-                outputs=[chatbot, msg]
-            )
+            clear_btn.click(lambda: ([], ""), outputs=[chatbot, msg])
 
         return interface
 

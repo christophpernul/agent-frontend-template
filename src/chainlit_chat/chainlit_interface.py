@@ -1,5 +1,5 @@
 """
-Gradio chat interface that wraps the AI Agent into a gradio chat functionality.
+Chainlit chat interface that wraps the AI Agent into a Chainlit chat functionality.
 """
 
 from agents import trace, gen_trace_id
@@ -9,7 +9,7 @@ from src.constants import APPLICATION_NAME
 
 
 class ChatInterface:
-    """Chat interface for a Gradio App with an AI Agent."""
+    """Chat interface for a Chainlit App with an AI Agent."""
 
     def __init__(
         self,
@@ -60,5 +60,4 @@ class ChatInterface:
         history.append({"role": "user", "content": message})
         history.append({"role": "assistant", "content": response})
 
-        # Response is not returned otherwise it is shown in the text field for user input
-        return "", history
+        return response, history
