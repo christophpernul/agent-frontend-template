@@ -2,12 +2,11 @@
 AI agent that processes user requests and sends meaningful responses to the user.
 """
 
-import asyncio
 from dataclasses import dataclass
 from agents import Agent, Runner, SQLiteSession
 
 from src.constants import AGENT_NAME
-from src.prompts import SYSTEM_PROMPT
+from src.agent.prompts import SYSTEM_PROMPT
 
 
 @dataclass

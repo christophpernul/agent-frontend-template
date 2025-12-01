@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 from dotenv import load_dotenv
 
-from src.interface.gradio_app import create_app
+from src.gradio_chat.gradio_app import create_app
 
 
 def load_environment():
@@ -45,8 +45,8 @@ def check_requirements():
     return True
 
 
-def main():
-    """Main application entry point."""
+def main_gradio():
+    """Main application entry point for Gradio app."""
     print("Starting AI Assistant...")
 
     # Load environment variables
@@ -77,5 +77,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main_gradio()
 

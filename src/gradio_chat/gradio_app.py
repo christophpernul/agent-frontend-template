@@ -6,7 +6,7 @@ import os
 import gradio as gr
 
 from src.constants import APPLICATION_NAME, APPLICATION_DESCRIPTION
-from src.interface.gradio_interface import ChatInterface
+from src.gradio_chat.gradio_interface import ChatInterface
 
 
 class ApplicationInterface:
