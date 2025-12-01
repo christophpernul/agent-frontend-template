@@ -4,7 +4,7 @@ AI agent that processes user requests and sends meaningful responses to the user
 
 import asyncio
 from dataclasses import dataclass
-from agents import Agent, trace, Runner
+from agents import Agent, Runner, SQLiteSession
 
 from src.constants import AGENT_NAME
 from src.prompts import SYSTEM_PROMPT
@@ -20,18 +20,21 @@ class AgentResponse:
 class AIAgent:
     """AI Agent class."""
 
-    def __init__(self, openai_api_key: str):
+    def __init__(self, trace_id: str, llm_name: str):
         self.agent = Agent(
             name=AGENT_NAME,
-            model="gpt-4o-mini",
-            instructions=self._get_system_message()
+            model=llm_name,
+            instructions=self._get_system_message(),
+            tools=[],
         )
+        self.session = SQLiteSession(trace_id)
 
-    def _get_system_message(self) -> str:
+    @staticmethod
+    def _get_system_message() -> str:
         """Get the system message for the AI agent."""
         return SYSTEM_PROMPT
 
-    async def _process_request(self, user_message: str) -> str:
+    async def process_request(self, user_message: str) -> str:
         """
         Process a user's request and return a response.
 
@@ -42,35 +45,8 @@ class AIAgent:
             Response from the AI agent
         """
         # Send the message directly to the agent
-        with trace(AGENT_NAME):
-            response = await Runner.run(self.agent, user_message)
+        response = await Runner.run(self.agent,
+                                    user_message,
+                                    session=self.session,
+                                    )
         return response.final_output
-
-    def chat_with_agent(self, message: str, history: list[dict]) -> tuple[str, list[dict]]:
-        """
-        Process a chat message and return the agent's response.
-
-        Args:
-            message: User's message
-            history: Chat history in messages format
-
-        Returns:
-            Tuple of (response, updated_history)
-        """
-        if not message.strip():
-            return "", history
-
-        # Process the message with the agent
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-
-        try:
-            response = loop.run_until_complete(self._process_request(message))
-        finally:
-            loop.close()
-
-        # Update history with messages format
-        history.append({"role": "user", "content": message})
-        history.append({"role": "assistant", "content": response})
-
-        return "", history

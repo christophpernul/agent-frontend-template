@@ -25,7 +25,8 @@ def load_environment():
 
 def check_requirements():
     """Check if required environment variables are set."""
-    required_vars = ["OPENAI_API_KEY"]
+    # TODO: Move this to the `agent.py` depending on the chosen model
+    required_vars = ["OPENAI_API_KEY", "LLM_MODEL_NAME"]
     missing_vars = []
 
     for var in required_vars:
@@ -56,10 +57,12 @@ def main():
         sys.exit(1)
 
     # Get OpenAI API key
-    openai_api_key = os.getenv("OPENAI_API_KEY")
+    # TODO: If non OpenAI model is used, this needs to be adapted!
+    llm_api_key = os.getenv("OPENAI_API_KEY")
+    llm_name = os.getenv("LLM_MODEL_NAME")
 
     # Create and launch the Gradio app
-    app = create_app(openai_api_key)
+    app = create_app(llm_api_key, llm_name)
 
     print("✅ AI Assistant is ready!")
     print("🌐 Opening web interface...")
