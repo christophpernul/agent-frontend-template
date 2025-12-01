@@ -4,6 +4,7 @@ from datetime import datetime
 from src.constants import (
     ENV_VAR_NAME_SERVER_NAME,
     ENV_VAR_NAME_SERVER_PORT,
+    ENV_VAR_NAME_MODEL_NAME,
     ENV_VAR_NAME_OPENAI_API_KEY,
 )
 
@@ -26,13 +27,15 @@ def validate_date(date_str: str, expected_format: str = "%d.%m.%Y") -> None:
         )
 
 
-def check_requirements():
+def check_requirements(required_vars: list = None):
     """Check if required environment variables are set."""
-    required_vars = [
-        ENV_VAR_NAME_SERVER_NAME,
-        ENV_VAR_NAME_SERVER_PORT,
-        ENV_VAR_NAME_OPENAI_API_KEY,
-    ]
+    if not required_vars:
+        required_vars = [
+            ENV_VAR_NAME_SERVER_NAME,
+            ENV_VAR_NAME_SERVER_PORT,
+            ENV_VAR_NAME_MODEL_NAME,
+            ENV_VAR_NAME_OPENAI_API_KEY,
+        ]
     missing_vars = []
 
     for var in required_vars:
