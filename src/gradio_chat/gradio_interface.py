@@ -4,7 +4,7 @@ Gradio chat interface that wraps the AI Agent into a gradio chat functionality.
 
 from agents import trace, gen_trace_id
 
-from src.agent.agent import AIAgent
+from src.agent.openai_agent_sdk import AIAgent
 from src.constants import APPLICATION_NAME
 
 
