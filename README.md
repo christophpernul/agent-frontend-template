@@ -48,11 +48,16 @@ Run chainlit application with this command:
 - [OpenAI](https://platform.openai.com/settings/organization/general)
 - [Gemini](https://aistudio.google.com/projects)
 
-### MCP Servers
+### MCP Server Catalogs
 - [MCP.so](https://mcp.so)
 - [Glama](https://glama.ai/mcp)
 - [Smithery](https://smithery.ai/)
 - [Huggingface Top11](https://huggingface.co/blog/LLMhacker/top-11-essential-mcp-libraries)
+
+### MCP Servers
+- [Polygon Stock Data](https://massive.com/)
+- [Brave search](https://brave.com/search/api/)
+- [Knowledge Graph Memory](https://github.com/modelcontextprotocol/servers/tree/main/src/memory)
 
 ### Blogs
 - [Why MCP?](https://huggingface.co/blog/Kseniase/mcp)
