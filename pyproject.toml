@@ -24,6 +24,7 @@ dependencies = [
     "playwright>=1.51.0",
     "polygon-api-client>=1.14.5",
 #    "sendgrid>=6.11.0",
+    "wikipedia>=1.4.0",
 #    frontend
     "chainlit>=2.8.3",
     "gradio>=5.33.1",

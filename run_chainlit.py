@@ -38,7 +38,6 @@ from src.constants import (
     APPLICATION_DESCRIPTION,
 )
 from src.utils.validation import check_requirements
-from src.chainlit_chat.chainlit_interface import ChatInterface
 
 ############################### START CODE ##########################################
 
@@ -68,6 +67,8 @@ elif LLM_MODEL_NAME.startswith("gemini"):
     API_KEY: str = GEMINI_API_KEY
     BASE_URL = GEMINI_API_BASE_URL
 
+from src.chainlit_chat.chainlit_interface import ChatInterface
+
 
 @cl.oauth_callback
 async def oauth_callback(
@@ -92,6 +93,7 @@ async def oauth_callback(
 @cl.on_chat_start
 async def on_chat_start():
     agent = ChatInterface(API_KEY, LLM_MODEL_NAME, llm_api_base_url=BASE_URL)
+    await agent.setup()  # langgraph only!
     cl.user_session.set("agent", agent)
     print("✅ AI Agent is ready!")
 

@@ -2,9 +2,10 @@
 Chainlit chat interface that wraps the AI Agent into a Chainlit chat functionality.
 """
 
-from agents import trace, gen_trace_id
+from agents import gen_trace_id, trace
 
 from src.agent.openai_agent_sdk import AIAgent
+from src.agent.langgraph_agent import AIAgent as AIAgentLangGraph
 from src.constants import APPLICATION_NAME
 
 
@@ -18,12 +19,17 @@ class ChatInterface:
         llm_api_base_url: str = None,
     ):
         self.trace_id = gen_trace_id()
-        self.agent = AIAgent(
-            trace_id=self.trace_id,
-            llm_api_key=llm_api_key,
-            llm_name=llm_name,
-            llm_api_base_url=llm_api_base_url,
-        )
+        # self.agent = AIAgent(
+        #     trace_id=self.trace_id,
+        #     llm_api_key=llm_api_key,
+        #     llm_name=llm_name,
+        #     llm_api_base_url=llm_api_base_url,
+        # )
+        self.agent = AIAgentLangGraph(self.trace_id)
+
+    async def setup(self):
+        """Langgraph only!"""
+        await self.agent.setup()
 
     async def run(
         self, message: str, history: list[dict] = None
@@ -51,7 +57,10 @@ class ChatInterface:
                     f"View trace: https://platform.openai.com/traces/trace?trace_id={self.trace_id}"
                 )
                 # yield f"View trace: https://platform.openai.com/traces/trace?trace_id={trace_id}"
-                response = await self.agent.process_request(message)
+                # response = await self.agent.process_request(message)
+                response = await self.agent.run_superstep(
+                    message, history
+                )  # langgraph only!
         except Exception as e:
             print(f"Error processing request: {e}")
             response = "I'm sorry, I encountered an error processing your request. Please try again."
