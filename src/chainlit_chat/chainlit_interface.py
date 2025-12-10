@@ -61,6 +61,7 @@ class ChatInterface:
                 response = await self.agent.run_superstep(
                     message, history
                 )  # langgraph only!
+                # TODO: Tracing is not working!
         except Exception as e:
             print(f"Error processing request: {e}")
             response = "I'm sorry, I encountered an error processing your request. Please try again."
